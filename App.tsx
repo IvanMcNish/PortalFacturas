@@ -53,6 +53,7 @@ const PublicRoute: React.FC<RouteProps> = ({ children }) => {
 };
 
 const App: React.FC = () => {
+  console.log('🚀 App se está renderizando');
   return (
     <AuthProvider>
       <Router>
