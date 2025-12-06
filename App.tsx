@@ -9,7 +9,6 @@ import Register from './pages/Register';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 
-// Protected Route Components
 interface RouteProps {
   children: React.ReactNode;
 }
@@ -18,36 +17,38 @@ interface PrivateRouteProps extends RouteProps {
   requiredRole?: UserRole;
 }
 
-const PrivateRoute = ({ children, requiredRole }: PrivateRouteProps) => {
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, requiredRole }) => {
   const { user, isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
-    return (
-      <div className="h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full"></div>
-      </div>
-    );
+    return <div>Cargando portal de facturas...</div>;
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" replace />;
   }
 
   if (requiredRole && user?.role !== requiredRole) {
-    // Redirect to their appropriate dashboard if they try to access wrong one
-    return <Navigate to={user?.role === UserRole.ADMIN ? '/admin' : '/dashboard'} />;
+    // Si intenta entrar a un dashboard que no le corresponde
+    if (user?.role === 'admin') {
+      return <Navigate to="/admin" replace />;
+    }
+    return <Navigate to="/user" replace />;
   }
 
   return <>{children}</>;
 };
 
-const PublicRoute = ({ children }: RouteProps) => {
+const PublicRoute: React.FC<RouteProps> = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
-  
+
   if (isAuthenticated) {
-    return <Navigate to={user?.role === UserRole.ADMIN ? '/admin' : '/dashboard'} />;
+    if (user?.role === 'admin') {
+      return <Navigate to="/admin" replace />;
+    }
+    return <Navigate to="/user" replace />;
   }
-  
+
   return <>{children}</>;
 };
 
@@ -56,28 +57,42 @@ const App: React.FC = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
-          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-          
-          <Route 
-            path="/dashboard" 
+          <Route
+            path="/login"
             element={
-              <PrivateRoute requiredRole={UserRole.USER}>
-                <UserDashboard />
-              </PrivateRoute>
-            } 
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
           />
-          
-          <Route 
-            path="/admin" 
+          <Route
+            path="/register"
             element={
-              <PrivateRoute requiredRole={UserRole.ADMIN}>
-                <AdminDashboard />
-              </PrivateRoute>
-            } 
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
           />
 
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route
+            path="/user"
+            element={
+              <PrivateRoute requiredRole={'user' as UserRole}>
+                <UserDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute requiredRole={'admin' as UserRole}>
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Ruta por defecto */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Router>
     </AuthProvider>
