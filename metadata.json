@@ -1,0 +1,5 @@
+{
+  "name": "Portal de Facturas Seguro",
+  "description": "Plataforma de gestión y descarga de facturas con roles de administrador y usuarios.",
+  "requestFramePermissions": []
+}
