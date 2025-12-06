@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
+console.log('🏁 index.tsx se está ejecutando');
+
 const rootElement = document.getElementById('root');
 
 if (!rootElement) {
