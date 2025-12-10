@@ -28,7 +28,7 @@ const SEED_INVOICES: Invoice[] = [
   {
     id: 'inv_1',
     title: 'Factura Servicio Enero',
-    amount: 150.00,
+    amount: 450000,
     date: '2023-10-15',
     status: 'Pagado',
     userId: 'u_demo',
@@ -38,11 +38,21 @@ const SEED_INVOICES: Invoice[] = [
   {
     id: 'inv_2',
     title: 'Transporte a Barrancabermeja',
-    amount: 1250.50,
+    amount: 1250000,
     date: '2023-10-20',
     status: 'Pendiente',
     documentId: '12345', // Linked by Document ID
     fileName: 'equipos.pdf',
+    fileUrl: '#'
+  },
+  {
+    id: 'inv_3',
+    title: 'Suministros de Oficina',
+    amount: 85000,
+    date: '2023-10-25',
+    status: 'Vencido',
+    userId: 'u_demo',
+    fileName: 'suministros.pdf',
     fileUrl: '#'
   }
 ];

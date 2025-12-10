@@ -7,7 +7,6 @@ import { UploadCloud, Users, FilePlus, CheckCircle, Search, AlertTriangle } from
 const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [view, setView] = useState<'upload' | 'list'>('upload');
   
   // Form State
   const [form, setForm] = useState({
@@ -117,7 +116,7 @@ const AdminDashboard: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Valor ($)</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Valor ($ COP)</label>
                     <input
                       type="number"
                       step="1"
@@ -147,7 +146,7 @@ const AdminDashboard: React.FC = () => {
                     onChange={(e) => setForm({...form, status: e.target.value as any})}
                 >
                     <option value="Pendiente">Pendiente</option>
-                    <option value="Pagada">Pagada</option>
+                    <option value="Pagado">Pagada</option>
                     <option value="Vencido">Vencido</option>
                 </select>
               </div>
@@ -155,7 +154,7 @@ const AdminDashboard: React.FC = () => {
               <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                 <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Asignar a:</label>
                 <div className="flex gap-4 mb-3">
-                    <label className="flex items-center gap-2 text-sm cursor-pointer text-gray-700 font-medium">
+                    <label className="flex items-center gap-2 text-sm cursor-pointer text-gray-900 font-bold hover:text-primary">
                         <input 
                             type="radio" 
                             name="assignType" 
@@ -165,7 +164,7 @@ const AdminDashboard: React.FC = () => {
                         />
                         Usuario Registrado
                     </label>
-                    <label className="flex items-center gap-2 text-sm cursor-pointer text-gray-700 font-medium">
+                    <label className="flex items-center gap-2 text-sm cursor-pointer text-gray-900 font-bold hover:text-primary">
                         <input 
                             type="radio" 
                             name="assignType" 
@@ -266,9 +265,9 @@ const AdminDashboard: React.FC = () => {
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th className="px-6 py-3">ID</th>
-                                <th className="px-6 py-3">Concepto</th>
+                                <th className="px-6 py-3 text-gray-900 font-bold">Concepto</th>
                                 <th className="px-6 py-3">Asignado A</th>
-                                <th className="px-6 py-3">Valor</th>
+                                <th className="px-6 py-3 text-gray-900 font-bold">Valor</th>
                                 <th className="px-6 py-3">Estado</th>
                             </tr>
                         </thead>

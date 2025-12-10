@@ -48,21 +48,12 @@ const UserDashboard: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch(status) {
-        case 'paid': return 'bg-green-100 text-green-800 border-green-200';
-        case 'pending': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-        case 'overdue': return 'bg-red-100 text-red-800 border-red-200';
+        case 'Pagado': return 'bg-green-100 text-green-800 border-green-200';
+        case 'Pendiente': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+        case 'Vencido': return 'bg-red-100 text-red-800 border-red-200';
         default: return 'bg-gray-100 text-gray-800';
     }
   };
-
-  const getStatusText = (status: string) => {
-     switch(status) {
-        case 'paid': return 'Pagada';
-        case 'pending': return 'Pendiente';
-        case 'overdue': return 'Vencida';
-        default: return status;
-    }
-  }
 
   const handleDownload = (invoice: Invoice) => {
     alert(`Simulando descarga de: ${invoice.fileName}\n(En una app real, esto abriría el PDF)`);
@@ -121,7 +112,7 @@ const UserDashboard: React.FC = () => {
               <div className="p-5">
                 <div className="flex justify-between items-start mb-4">
                   <div className={`px-2.5 py-1 rounded-full text-xs font-semibold border ${getStatusColor(inv.status)}`}>
-                    {getStatusText(inv.status)}
+                    {inv.status}
                   </div>
                   <span className="text-xs text-gray-400 font-mono">#{inv.id.slice(-6)}</span>
                 </div>
