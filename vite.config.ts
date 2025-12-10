@@ -20,4 +20,7 @@ export default defineConfig(({ mode }) => {
         }
       }
     };
+    export default defineConfig({
+  base: "/PortalFacturas/",
+  plugins: [react()]
 });
