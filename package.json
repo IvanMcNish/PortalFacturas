@@ -11,6 +11,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    
     "@radix-ui/react-alert-dialog": "^1.0.0",
     "@radix-ui/react-checkbox": "^1.0.0",
     "@radix-ui/react-dialog": "^1.0.0",
@@ -30,8 +31,9 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.424.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+     "react": "19.0.0-rc-66855b96-20241106",
+  "react-dom": "19.0.0-rc-66855b96-20241106",
+  "react-router-dom": "^6.28.0"
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7"
   },
